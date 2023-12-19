@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+{% block title %}Detalles {{vehiculo.vehiculo}}{%endblock%}
+
+{% block h1 %}Detalles {{vehiculo.vehiculo}}{% endblock %}
+
+
+{% block main %}
+<table class="table">
+    <thead>
+        <tr>
+            {% for columna in vehiculo.keys %}
+                <th scope="col">{{ columna.upper }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for valor in vehiculo.values %}
+                <td scope="row">{{ valor }}</td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
+</br>
+<h2 class="h2 text-center">Modelos</h2>
+<table class="table">
+    <thead>
+        <tr>
+            {% for columna in modelos.0.keys %}
+                <th scope="col">{{ columna.upper }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for modelo in modelos %}
+            <tr>
+                <td scope="row">{{ modelo.id }}</td>
+                <td scope="row">{{ modelo.modelo }}</td>
+                <td scope="row">{% for color in modelo.colores %} {{color}}{% if not forloop.last %},{% endif %} {% endfor %}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2 class="h2 text-center">Imagenes</h2>
+
+<div id="carouselImagenes" class="carousel slide w-50 m-auto">
+    <div class="carousel-inner">
+        {% for imagen in imagenes %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{imagen.url}}" class="d-block w-100" alt="...">
+            </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselImagenes" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselImagenes" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+{% endblock %}

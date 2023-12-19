@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Vehiculos{% endblock %}
+
+{% block h1 %}Lista de vehiculos{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+            <tr>
+                {% for columna in vehiculos.0.keys %}
+                    <th scope="col">{{ columna }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehiculo in vehiculos %}
+                <tr>
+                    {% for valor in vehiculo.values %}
+                        <td scope="row">{{ valor }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

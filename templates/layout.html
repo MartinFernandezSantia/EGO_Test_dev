@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block layout %}
+    <main class="container">
+        <h1 class="h1 text-center">{% block h1 %}{% endblock %}</h1><br>
+
+        {% block main%}{%endblock%}
+    </main>
+{% endblock %}

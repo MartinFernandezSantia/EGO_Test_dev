@@ -13,7 +13,7 @@ class InlineImagenes(admin.TabularInline):
 class AdminVehiculos(admin.ModelAdmin):
     inlines = [InlineModelosVehiculos, InlineImagenes]
 
-    list_display = ["vehiculo", "price_formatted", "fecha", "tipo"]
+    list_display = ["id_vehiculos","vehiculo", "price_formatted", "fecha", "tipo"]
     list_filter = ("tipo", "fecha")
 
     search_fields = ("vehiculo",)
