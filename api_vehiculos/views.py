@@ -1,58 +1,33 @@
 from django.shortcuts import render
-from modelos.models import Vehiculos, ModelosVehiculos, Imagenes
-# Create your views here.
+from modelos.models import Vehiculos, ModelosVehiculos, Imagenes, Colores
+from django.http import JsonResponse, HttpResponseNotFound, Http404
 
-def lista_vehiculos(request):
-    vehiculos = []
-    todos_vehiculos = Vehiculos.objects.all()
+# Funcion general para obtener todos los objetos o un objeto por id de cualquiera de los modelos
+def obtener_objectos(request, objetos, tipo_objeto, id=None):
+    if id is None:
+        # Si no se proporciona un ID, devuelve todos los colores
+        return JsonResponse({tipo_objeto: list(objetos())})
+    else:
+        # Si se proporciona un ID, intenta obtener ese color
+        try:
+            objeto = objetos().get(id=id)
+            return JsonResponse({tipo_objeto: objeto})
+        except:
+            return HttpResponseNotFound("El objeto no existe")
 
-    for vehiculo in todos_vehiculos:
-        params = {
-            "id": vehiculo.id_vehiculos,
-            "vehiculo": vehiculo.vehiculo,
-            "precio": vehiculo.precio,
-            "tipo": vehiculo.tipo,
-            "fecha": vehiculo.fecha,
-        }
-        vehiculos.append(params)
 
-    print(lista_vehiculos)
-
-    return render(request, "api_vehiculos/lista_vehiculos.html", {"vehiculos": vehiculos})
-    
-def detalles_vehiculo(request, id):
-    vehiculo = Vehiculos.objects.get(id_vehiculos=id)
-    modelos = ModelosVehiculos.objects.filter(vehiculo=vehiculo)
-    imagenes = Imagenes.objects.filter(vehiculo=vehiculo)
-
-    params = {
-        "vehiculo": {
-            "id": vehiculo.id_vehiculos,
-            "vehiculo": vehiculo.vehiculo,
-            "precio": vehiculo.precio,
-            "tipo": vehiculo.tipo,
-            "fecha": vehiculo.fecha,
-        },
+# Funcion para procesar los parametros enviados por la URL y llamar a obtener_objetos()
+def procesar_consulta(request, objeto, id=None):
+    modelos = {
+        "imagenes": Imagenes.objects.values,
+        "colores": Colores.objects.values,
+        "vehiculos": Vehiculos.objects.values,
+        "modelos_vehiculos": ModelosVehiculos.objects.values,
     }
-
-    lista_modelos = []
-
-    for modelo in modelos:
-        colores_modelo = modelo.colores.all()
-
-        lista_modelos.append({
-            "id": modelo.id_modelos_vehiculos,
-            "modelo": modelo.modelo,
-            "colores": [color.color for color in colores_modelo]
-        }) 
-
-    # lista_imagenes = []
-
-
-
-    params["modelos"] = lista_modelos
-    params["imagenes"] = [imagen.imagen for imagen in imagenes]
-
-    print(params)
-
-    return render(request, "api_vehiculos/detalles_vehiculo.html", params)
+    # Si el objeto no coincide con uno de los modelos
+    if objeto not in modelos.keys():
+        raise Http404("Esta pagina no extiste")
+    
+    return obtener_objectos(request, modelos[objeto], objeto, id)
+    
+    

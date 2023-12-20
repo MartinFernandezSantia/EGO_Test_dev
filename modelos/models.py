@@ -11,7 +11,7 @@ class Colores(models.Model):
     class Meta:  
         verbose_name_plural = 'Colores'
 
-    id_colores = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     color = models.CharField(max_length=30, null=False, blank=False)
 
     def __str__(self):
@@ -40,7 +40,7 @@ class Vehiculos(models.Model):
         (CROSSOVER, "CrossOver"),
     ]
 
-    id_vehiculos = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     vehiculo = models.CharField(max_length=100, blank=False, null=False, unique=True)
     precio = models.FloatField(null=True, blank=False)
     fecha = models.IntegerField(validators=[validar_cuatro_digitos], null=True, blank=False)
@@ -62,7 +62,7 @@ class ModelosVehiculos(models.Model):
     class Meta:  
         verbose_name_plural = 'Modelos de Vehiculos'
 
-    id_modelos_vehiculos = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     vehiculo = models.ForeignKey(Vehiculos, on_delete=models.CASCADE)
     modelo = models.CharField(max_length=100, null=False, blank=False)
     colores = models.ManyToManyField(Colores)
@@ -75,7 +75,7 @@ class Imagenes(models.Model):
     class Meta:  
         verbose_name_plural = 'Imagenes'
 
-    id_imagen_modelo = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     imagen = models.ImageField(null=False, blank=False, upload_to="imagenes_modelos/")
     vehiculo = models.ForeignKey(Vehiculos, on_delete=models.CASCADE)
 
