@@ -41,6 +41,6 @@ Todos los comandos para la instalación y uso del proyecto estan destinados a us
 
 - URLs
 
-  - **localhost:8000/admin** #Panel de administración
-  - **localhost:8000/lista_vehiculos**        #Listado de todos los vehiculos
-  - **localhost:8000/detalles_vehiculo/{id}** #Detalles sobre un vehiculo en particular. Ingresar id del vehiculo en vez de {id}
+  - **localhost:8000/admin** *#Panel de administración*
+  - **localhost:8000/lista_vehiculos** *#Listado de todos los vehiculos*
+  - **localhost:8000/detalles_vehiculo/{id}** *#Detalles sobre un vehiculo en particular. Ingresar id del vehiculo en vez de {id}*
