@@ -15,7 +15,7 @@ Todos los comandos para la instalación y uso del proyecto estan destinados a us
 1. **Clonar el Repositorio:**
 
    ```bash
-      git clone https://github.com/MartinFernandezSantia/EGO_Test_dev.git
+   git clone https://github.com/MartinFernandezSantia/EGO_Test_dev.git
    ```
 
 2. **Instalar Dependencias:**
@@ -42,5 +42,11 @@ Todos los comandos para la instalación y uso del proyecto estan destinados a us
 - URLs
 
   - **localhost:8000/admin** *#Panel de administración*
-  - **localhost:8000/lista_vehiculos** *#Listado de todos los vehiculos*
-  - **localhost:8000/detalles_vehiculo/{id}** *#Detalles sobre un vehiculo en particular. Ingresar id del vehiculo en vez de {id}*
+  - **localhost:8000/api/vehiculos** *#Json de todos los vehiculos*
+  - **localhost:8000/api/vehiculos/{id}** *#Json de un vehiculo*
+  - **localhost:8000/api/modelos_vehiculos** *#Json de todos los modelos de vehiculos*
+  - **localhost:8000/api/modelos_vehiculos/{id}** *#Json de un modelo de vehiculo*
+  - **localhost:8000/api/imagenes** *#Json de todas las imagenes*
+  - **localhost:8000/api/imagenes/{id}** *#Json de una imagen*
+  - **localhost:8000/api/colores** *#Json de todos los colores*
+  - **localhost:8000/api/colores/{id}** *#Json de uno de los colores*
